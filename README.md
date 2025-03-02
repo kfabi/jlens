@@ -3,7 +3,7 @@
 ![build](https://github.com/kfabi/jlens/actions/workflows/build.yml/badge.svg)
 
 ## What is JLens
-JLens introduces Lenses for java records. Lenses allow the user to 'modify' deeply nested record structures. Consider the following situation:
+JLens introduces lenses for java records. Lenses allow the user to 'modify' deeply nested record structures. Consider the following situation:
 
 ````java
 import java.util.List;
@@ -42,7 +42,7 @@ In this example u can see that Lenses *compose* nicely and that you just need to
 ## How to use
 
 ### Gradle:
-add the lens module as an ``implementation`` dependency and teh annotation-processor as an ``annotationProcessor`` dependency.
+add the lens module as an ``implementation`` dependency and the annotation-processor as an ``annotationProcessor`` dependency.
 Now just annotate your records with ``@Lenses`` and compile your project and the lenses should be generated.
 
 ## Supported Features
@@ -54,8 +54,12 @@ JLens can generate lenses for records with:
 
 Naming Scheme:
 
-For top-level records the name will be <Record>Lenses. e.g.: ``record MyRecord() {} -> MyRecordLenses``
+For top-level records the name will be {Record}Lenses. e.g.: ``record MyRecord() {} -> MyRecordLenses``
 
-For records that are inner classes the name will be <OuterClass><Record>Lenses. eg.: ``class Outer { record Innner() {} } -> OuterInnerLenses``
+For records that are inner classes the name will be {OuterClass}{Record}Lenses. e.g.: ``class Outer { record Innner() {} } -> OuterInnerLenses``
 
 The lenses will be generated in the same package as the record.
+
+## Credits
+
+This project is inspired by [arrow-kt](https://arrow-kt.io/learn/immutable-data/). A phenomenal library for typed fp in Kotlin.
