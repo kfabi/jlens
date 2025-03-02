@@ -1,0 +1,13 @@
+[versions]
+google-auto = "1.1.1"
+junit = "5.10.0"
+spotless = "7.0.2"
+
+[libraries]
+google-auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "google-auto"}
+google-auto-service = { module = "com.google.auto.service:auto-service", version.ref = "google-auto"}
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit"}
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
