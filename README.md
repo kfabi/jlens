@@ -39,11 +39,28 @@ Looks quite a bit nicer, doesn't it? And if you squint your eyes a bit, you can 
 
 In this example u can see that Lenses *compose* nicely and that you just need to compose one more Lens for every level of nesting.
 
-## How to use
+## Installing
 
 ### Gradle:
-add the lens module as an ``implementation`` dependency and the annotation-processor as an ``annotationProcessor`` dependency.
-Now just annotate your records with ``@Lenses`` and compile your project and the lenses should be generated.
+
+In your projects ``build.gradle.kts`` add the following repository:
+
+````kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/kfabi/jlens")
+    }
+}
+````
+
+And declare the following dependencies:
+
+````kotlin
+dependencies {
+    implementation("de.kfabi:jlens:1.0.2")
+    annotationProcessor("de.kfabi:jlens-annotation-processor:1.0.2")
+}
+````
 
 ## Supported Features
 
