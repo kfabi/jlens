@@ -1,6 +1,7 @@
 # JLens
 
 ![build](https://github.com/kfabi/jlens/actions/workflows/build.yml/badge.svg)
+![GitHub Release](https://img.shields.io/github/v/release/:kfabi/:jlens)
 
 ## What is JLens
 JLens introduces lenses for java records. Lenses allow the user to 'modify' deeply nested record structures. Consider the following situation:
