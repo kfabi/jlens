@@ -22,7 +22,9 @@ public class GenerateLensesProcessor extends AbstractProcessor {
         var typeElement = (TypeElement) element;
         if (!typeElement.getKind().equals(ElementKind.RECORD)) {
           throw new RuntimeException(
-              "Annotation @GenerateLens is only applicable to records. Please remove it from class '"
+              "Annotation @"
+                  + Lenses.class.getSimpleName()
+                  + " is only applicable to records. Please remove it from class '"
                   + ((TypeElement) element).getQualifiedName()
                   + "'.");
         }
@@ -52,8 +54,6 @@ public class GenerateLensesProcessor extends AbstractProcessor {
     var targetPackage =
         fullyQualifiedSrcClassName.substring(
             0, fullyQualifiedSrcClassName.length() - simpleSrcClassName.length() - 1);
-
-    var lastDot = fullyQualifiedSrcClassName.lastIndexOf('.');
     var indent = "    ";
     JavaFileObject lensFile =
         processingEnv.getFiler().createSourceFile(targetClassName, recordElement);
