@@ -28,5 +28,10 @@ publishing {
       }
     }
   }
-  publications { register<MavenPublication>("gpr") { from(components["java"]) } }
+  publications {
+    register<MavenPublication>("gpr") {
+      artifactId = "${rootProject.name}-${project.name}"
+      from(components["java"])
+    }
+  }
 }
