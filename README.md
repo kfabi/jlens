@@ -15,14 +15,17 @@ public record MyRecord(String someString, int someInt, MyNestedRecord nested) {
 public record MyNestedRecord(boolean someBoolean, List<String> someStrings) {
 }
 
-MyRecord instance = new MyRecord("Hello, World!", 1, new MyNestedRecord(true, List.of("my element")));
+MyRecord instance = new MyRecord(
+        "Hello, World!", 1, new MyNestedRecord(true, List.of("my element")));
 ````
 
 and you have an ``instance`` of ``MyRecord`` where u just want to have a new ``changedInstance`` where the value of ``myRecord.nested().someBoolean()`` is set to false instead of true. 
 You now have to do the following:
 
 ````java
-MyRecord changedInstance = new MyRecord(instance.someString(), instance.someInt(), new MyNestedRecord(false, instance.nested().someStrings()));
+MyRecord changedInstance = new MyRecord(
+        instance.someString(), instance.someInt(), 
+        new MyNestedRecord(false, instance.nested().someStrings()));
 ````
 
 You can imagine that this would become quite tedious quite quickly. 
@@ -33,7 +36,9 @@ But JLens comes to the rescue! With JLens you can annotate your records with the
 With lenses the tedious task of *setting* ``myRecord.nested().someBoolean()`` to false looks like this:
 
 ````java
-MyRecord changedWithLens = MyRecordLenses.nested().compose(MyNestedRecordLenses.someBoolean()).set(instance, false);
+MyRecord changedWithLens = MyRecordLenses.nested()
+        .compose(MyNestedRecordLenses.someBoolean())
+        .set(instance, false);
 ````
 
 Looks quite a bit nicer, doesn't it? And if you squint your eyes a bit, you can almost see ``instance.nested().someBoolean().set(false)``.
@@ -75,7 +80,7 @@ dependencies {
 }
 ````
 
-For more information about installing packages from GitHup Package Registry visit the [official docs](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#using-a-published-package).
+For more information about installing packages from GitHub Package Registry visit the [official docs](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#using-a-published-package).
 
 ## Supported Features
 
