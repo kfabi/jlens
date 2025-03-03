@@ -3,7 +3,7 @@ plugins { alias(libs.plugins.spotless) }
 allprojects {
   group = "de.kfabi"
 
-  version = "1.0.2-SNAPSHOT"
+  version = "1.0.2"
 }
 
 repositories { mavenCentral() }
