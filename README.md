@@ -42,6 +42,14 @@ In this example u can see that Lenses *compose* nicely and that you just need to
 ## Installing
 
 ### Gradle:
+First you need to create a [personal GitHub access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with the ``read:packages`` scope.
+
+Now you need to add the following properties to the ``gradle.properties`` either at your [gradle user home](https://docs.gradle.org/current/userguide/directory_layout.html#dir:gradle_user_home) (recommended) or in the root of your project:
+
+````properties
+gpr.user=<your_github_username>
+gpr.key=<your_personal_GitHub_access_token>
+````
 
 In your projects ``build.gradle.kts`` add the following repository:
 
@@ -49,6 +57,10 @@ In your projects ``build.gradle.kts`` add the following repository:
 repositories {
     maven {
         url = uri("https://maven.pkg.github.com/kfabi/jlens")
+        credentials {
+            username = project.findProperty("gpr.user") as String?
+            password = project.findProperty("gpr.key") as String?
+        }
     }
 }
 ````
@@ -61,6 +73,8 @@ dependencies {
     annotationProcessor("de.kfabi:jlens-annotation-processor:1.0.2")
 }
 ````
+
+For more information about installing packages from GitHup Package Registry visit the [official docs](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#using-a-published-package).
 
 ## Supported Features
 
