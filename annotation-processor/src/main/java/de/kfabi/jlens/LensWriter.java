@@ -39,7 +39,7 @@ public class LensWriter extends PrintWriter {
       }
       print('>');
     }
-    print(" Lens<");
+    print(" NamedLens<");
     printRecordType();
     print(", ");
     printComponentType(component);
@@ -48,7 +48,10 @@ public class LensWriter extends PrintWriter {
     println("() { ");
     printIndent();
     printIndent();
-    println("return new Lens<>() {");
+    println("return new NamedLens<>() {");
+
+    // name
+    printName(component);
 
     // get
     printGet(component);
@@ -62,6 +65,18 @@ public class LensWriter extends PrintWriter {
     println("};");
     printIndent();
     println("}");
+    println();
+  }
+
+  private void printName(RecordComponentElement component) {
+    printIndent();
+    printIndent();
+    println("@Override");
+    printIndent();
+    printIndent();
+    print("public String name() { return \"");
+    print(component.getSimpleName());
+    print("\"; }");
     println();
   }
 
@@ -114,10 +129,6 @@ public class LensWriter extends PrintWriter {
 
   private void printIndent() {
     print(indent);
-  }
-
-  private void printRecordName() {
-    print(record.getSimpleName());
   }
 
   private void printRecordType() {

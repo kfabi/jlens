@@ -64,7 +64,7 @@ public class GenerateLensesProcessor extends AbstractProcessor {
         out.println();
       }
       // imports
-      out.println("import de.kfabi.jlens.Lens;");
+      out.println("import de.kfabi.jlens.NamedLens;");
       out.println();
 
       // class head
