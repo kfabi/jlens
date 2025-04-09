@@ -19,7 +19,7 @@ MyRecord instance = new MyRecord(
     "Hello, World!", 1, new MyNestedRecord(true, List.of("my element")));
 ````
 
-and you have an ``instance`` of ``MyRecord`` where u just want to have a new ``changedInstance`` where the value of ``myRecord.nested().someBoolean()`` is set to false instead of true. 
+and you have an ``instance`` of ``MyRecord`` where you just want to have a new ``changedInstance`` where the value of ``myRecord.nested().someBoolean()`` is set to false instead of true. 
 You now have to do the following:
 
 ````java
