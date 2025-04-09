@@ -16,7 +16,7 @@ public record MyNestedRecord(boolean someBoolean, List<String> someStrings) {
 }
 
 MyRecord instance = new MyRecord(
-        "Hello, World!", 1, new MyNestedRecord(true, List.of("my element")));
+    "Hello, World!", 1, new MyNestedRecord(true, List.of("my element")));
 ````
 
 and you have an ``instance`` of ``MyRecord`` where u just want to have a new ``changedInstance`` where the value of ``myRecord.nested().someBoolean()`` is set to false instead of true. 
@@ -24,8 +24,8 @@ You now have to do the following:
 
 ````java
 MyRecord changedInstance = new MyRecord(
-        instance.someString(), instance.someInt(), 
-        new MyNestedRecord(false, instance.nested().someStrings()));
+    instance.someString(), instance.someInt(), 
+    new MyNestedRecord(false, instance.nested().someStrings()));
 ````
 
 You can imagine that this would become quite tedious quite quickly. 
@@ -37,13 +37,23 @@ With lenses the tedious task of *setting* ``myRecord.nested().someBoolean()`` to
 
 ````java
 MyRecord changedWithLens = MyRecordLenses.nested()
-        .compose(MyNestedRecordLenses.someBoolean())
-        .set(instance, false);
+    .compose(MyNestedRecordLenses.someBoolean())
+    .set(instance, false);
 ````
 
 Looks quite a bit nicer, doesn't it? And if you squint your eyes a bit, you can almost see ``instance.nested().someBoolean().set(false)``.
 
-In this example u can see that Lenses *compose* nicely and that you just need to compose one more Lens for every level of nesting.
+In this example you can see that Lenses *compose* nicely and that you just need to compose one more Lens for every level of nesting.
+
+And if you need to combine multiple state changes, there is a builder with a fluent interface:
+
+`````java
+MyRecord changedWithBuilder = 
+    CopyBuilder.of(instance)
+        .set(MyRecordLenses.nested().compose(MyNestedRecordLenses.someBoolean()), false)
+        .modify(MyRecordLenses.someInt(), x -> x + 1)
+        .build();
+`````
 
 ## Installing
 
